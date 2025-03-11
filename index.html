@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wateachers</title>
+<h1>Wateachers</h1>
+<div id="marco" style="display: flex">
+</div>
+
+<script>
+    const start=220;
+    const end=230;
+    for(let i=start;i<end;i++) {
+        document.getElementById("marco").innerHTML += `<img id='s${i}' alt='Captura' style='border:1px solid black; width: 80%;'>`;
+    }
+
+    //  const red = "10.2.1.";
+    const red = "172.21.44.";
+
+    function showAll(){
+        for(let i=start;i<end;i++) {
+            show(i);
+        }
+    }
+
+    async function show(i) {
+        while(true){
+            document.getElementById(`s${i}`).src = await fetchScreenshot(red + i);
+            await sleep(500);
+        }
+    }
+
+    async function fetchScreenshot(ip) {
+        console.log(`feching ${ip}`);
+        return URL.createObjectURL(new Blob([new DataView((await (await fetch(`http://${ip}:7654/screenshot`)).arrayBuffer()))], { type: "image/png" }));
+    }
+    showAll();
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+</script>
+
+</html>
