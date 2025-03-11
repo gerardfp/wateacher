@@ -3,19 +3,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Wateachers</title>
-<h1>Wateachers</h1>
-<div id="marco" style="display: flex">
+<style>div:has(img[src=undefined]), div:has(img:not([src])) { display: none; }</style>
+<div id="marco" style="display: flex; flex-wrap: wrap; gap: 0.3em;">
 </div>
 
 <script>
-    const start=220;
-    const end=230;
+    const start=161;
+    const end=172;
     for(let i=start;i<end;i++) {
-        document.getElementById("marco").innerHTML += `<img id='s${i}' alt='Captura' style='border:1px solid black; width: 80%;'>`;
+        document.getElementById("marco").innerHTML += `<div><img id='s${i}' alt='Captura' style='border:1px solid black; max-width: 400px;'><span id="i${i}"></span></div>`;
     }
 
-    //  const red = "10.2.1.";
-    const red = "172.21.44.";
+    const red = "10.2.1.";
+    //const red = "172.21.44.";
 
     function showAll(){
         for(let i=start;i<end;i++) {
@@ -26,15 +26,29 @@
     async function show(i) {
         while(true){
             document.getElementById(`s${i}`).src = await fetchScreenshot(red + i);
-            await sleep(500);
+            document.getElementById(`i${i}`).innerText = await fetchInfo(red+i);
+            await sleep(2000);
         }
     }
 
+    async function fetchInfo(ip) {
+      try {
+            return (await (await fetch(`http://${ip}:7654/info`)).json()).username;
+      } catch(e) {
+        console.log(e);
+      }
+    }
+    
     async function fetchScreenshot(ip) {
         console.log(`feching ${ip}`);
-        return URL.createObjectURL(new Blob([new DataView((await (await fetch(`http://${ip}:7654/screenshot`)).arrayBuffer()))], { type: "image/png" }));
+        try {
+           return URL.createObjectURL(new Blob([new DataView((await (await fetch(`http://${ip}:7654/screenshot`)).arrayBuffer()))], { type: "image/png" }));
+        } catch(e) {
+          console.log(e);
+        }
     }
     showAll();
+    
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
