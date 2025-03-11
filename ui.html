@@ -80,8 +80,8 @@
         $("full").innerHTML += `<img popover id="f${i}" alt='Captura'>`
         $("marco").innerHTML += `
             <div class="host" id="host${i}" 
-                sonclick="host${i}.classList.toggle('wide'); this.scrollIntoView()"
-                onclick="f${i}.showPopover()"
+                onclick="host${i}.classList.toggle('wide'); this.scrollIntoView()"
+                sonclick="f${i}.showPopover()"
                 draggable=true ondragstart="drag(event)" ondrop=drop(event) ondragover="allowDrop(event)">
                     <img id='s${i}' alt='Captura'>
                     <span id="i${i}"></span>
