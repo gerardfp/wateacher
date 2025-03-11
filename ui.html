@@ -20,8 +20,9 @@
     }
 
     #full img {
-        max-width: 80%;
-        max-height: 80%;
+        width: 80vw;
+        height: 45vw;
+        object-fit: contain;
     }
     .host {
         border: 1px solid black;
@@ -76,11 +77,11 @@
     const start=151;
     const end=172;
     for(let i=start;i<end;i++) {       
-        //$("full").innerHTML += `<img popover id="f${i}" alt='Captura'>`
+        $("full").innerHTML += `<img popover id="f${i}" alt='Captura'>`
         $("marco").innerHTML += `
             <div class="host" id="host${i}" 
-                onclick="host${i}.classList.toggle('wide'); this.scrollIntoView()"
-                popovertarget="f${i}"" 
+                sonclick="host${i}.classList.toggle('wide'); this.scrollIntoView()"
+                onclick="f${i}.showPopover()"
                 draggable=true ondragstart="drag(event)" ondrop=drop(event) ondragover="allowDrop(event)">
                     <img id='s${i}' alt='Captura'>
                     <span id="i${i}"></span>
@@ -103,7 +104,7 @@
             const username = await fetchInfo(i);
             const shot = await fetchScreenshot(i);
             $(`s${i}`).src = shot;
-            //$(`f${i}`).src = shot;
+            $(`f${i}`).src = shot;
             $(`i${i}`).innerText = username;
             $(`h${i}`).innerText = username;
             await sleep(2000);
