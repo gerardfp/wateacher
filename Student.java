@@ -33,21 +33,24 @@ public class Student {
         @Override
         public void handle(HttpExchange exchange) throws IOException {
             exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
-            exchange.getResponseHeaders().set("Access-Control-Allow-Methods", "GET, OPTIONS");
-            exchange.getResponseHeaders().set("Access-Control-Allow-Headers", "Content-Type");
+
 
             if ("OPTIONS".equals(exchange.getRequestMethod())) {
+                // NO ES NECESARI EL OPTIONS
+                exchange.getResponseHeaders().set("Access-Control-Allow-Methods", "GET, OPTIONS");
+                exchange.getResponseHeaders().set("Access-Control-Allow-Headers", "Content-Type");
                 // Preflight request CORS
-                exchange.sendResponseHeaders(204, -1);
+                exchange.sendResponseHeaders(204, -1);  // ¿200?
                 return;
             }
 
             if ("GET".equals(exchange.getRequestMethod())) {
                 try {
+                    String resp = "{\"username\": \"" + System.getProperty("user.name") + "\"}";
                     exchange.getResponseHeaders().set("Content-Type", "application/json");
-                    exchange.sendResponseHeaders(200, "{'username': 'gerard'}".getBytes().length);
+                    exchange.sendResponseHeaders(200, resp.length());
                     OutputStream os = exchange.getResponseBody();
-                    os.write("{'username': 'gerard'}".getBytes());
+                    os.write(resp.getBytes());
                     os.close();
                 } catch (Exception e) {
                     e.printStackTrace();
