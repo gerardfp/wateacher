@@ -16,9 +16,7 @@ public class Teacher {
     public static void main(String[] args) throws Exception {
         int port = 7655;
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
-
         server.createContext("/", new HtmlHandler());
-        server.setExecutor(null);
         server.start();
         System.out.println("Servidor HTTP corriendo en http://localhost:" + port);
     }
@@ -31,9 +29,8 @@ public class Teacher {
             byte[] contentBytes = content.getBytes();
             exchange.getResponseHeaders().set("Content-Type", "text/html");
             exchange.sendResponseHeaders(200, contentBytes.length);
-            OutputStream os = exchange.getResponseBody();
-            os.write(contentBytes);
-            os.close();
+            exchange.getResponseBody().write(contentBytes);
+            exchange.getResponseBody().close();
         }
     }
 }
