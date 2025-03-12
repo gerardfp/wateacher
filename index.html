@@ -104,7 +104,9 @@ div.host:has(img[src=undefined]), div.host:has(img:not([src])) { display: none; 
     $("rate").addEventListener("input", (e) => { window.localStorage.setItem("rate", e.target.value); });
 
 
-    for(let i=ipToNumber(startip); i <= ipToNumber(endip); i++) {
+    const startipNumber = ipToNumber(startip);
+    const endipNumber = ipToNumber(endip);
+    for(let i=startipNumber; i <= endipNumber; i++) {
         $("full").innerHTML += `<img popover id="full${i}" alt='Captura'>`
         $("marco").innerHTML += `
             <div class="host" id="host${i}" host="host${i}"
