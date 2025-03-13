@@ -122,14 +122,20 @@ div.host:has(img[src=undefined]), div.host:has(img:not([src])) { display: none; 
     async function show(n) {
         const ip = numberToIp(n);
         while(true){
-            const username = (await (await fetch(`http://${ip}:7654/info`)).json()).username;
-            const shot = URL.createObjectURL(new Blob([new DataView((await (await fetch(`http://${ip}:7654/screenshot`)).arrayBuffer()))], { type: "image/png" }));
+            try {
+                const username = (await (await fetch(`http://${ip}:7654/info`)).json()).username;
+                const shot = URL.createObjectURL(new Blob([new DataView((await (await fetch(`http://${ip}:7654/screenshot`)).arrayBuffer()))], { type: "image/png" }));
 
-            $(`shot${n}`).src = shot;
-            $(`full${n}`).src = shot;
-            $(`info${n}`).innerText = username;
-
+                $(`shot${n}`).src = shot;
+                $(`full${n}`).src = shot;
+                $(`info${n}`).innerText = username;
+            } catch(e) {
+                $(`shot${n}`).removeAttribute('src');
+                $(`full${n}`).removeAttribute('src');
+                $(`info${n}`).innerText = "";
+            }
             await sleep(rate);
+
         }
     }
 
