@@ -109,8 +109,8 @@ div.host:has(img[src=undefined]), div.host:has(img:not([src])) { display: none; 
 </div>
 
 <script>
-    let startip = localStorage.getItem("startip") || "192.168.1.217";
-    let endip = localStorage.getItem("endip") || "192.168.1.217";
+    let startip = localStorage.getItem("startip") || "10.2.1.100";
+    let endip = localStorage.getItem("endip") || "10.2.1.199";
     let rate = localStorage.getItem("rate") || 2000;
     $("startip").value = startip;
     $("endip").value = endip;
