@@ -1,10 +1,6 @@
 #!/bin/bash
 
-mkdir -p /tmp/wateacher
-
-cd /tmp/wateacher
-
-cat << EOF > Student.java
+cat << EOF > /usr/local/bin/Student.java
 import com.sun.net.httpserver.HttpServer;
 
 import javax.imageio.ImageIO;
@@ -70,21 +66,21 @@ public class Student {
 }
 EOF
 
-mkdir -p bin
-javac -d bin "Student.java"
-if [ $? -ne 0 ]; then
-    exit 2
-fi
-
-echo "Main-Class: Student > manifest.txt
-jar cfm "Student.jar" manifest.txt -C bin .
-rm manifest.txt
-
-cp Student.jar /usr/local/bin/
+#mkdir -p bin
+#javac -d bin "Student.java"
+#if [ $? -ne 0 ]; then
+#    exit 2
+#fi
+#echo "Main-Class: Student > manifest.txt
+#jar cfm "Student.jar" manifest.txt -C bin .
+#rm manifest.txt
+#cp Student.jar /usr/local/bin/
 
 cat << EOF > /usr/local/bin/wateacher-student
-java -jar /usr/local/bin/Student.java
+cd /usr/local/bin/
+java Student.java
 EOF
+chmod +x /usr/local/bin/wateacher-student
 
 mkdir -p /etc/xdg/autostart/
 cat << EOF > /etc/xdg/autostart/wateacher-student.desktop
