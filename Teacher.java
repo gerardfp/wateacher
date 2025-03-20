@@ -171,7 +171,7 @@ div.host:has(img[src=undefined]), div.host:has(img:not([src])) { display: none; 
 """;
 
     public static void main(String[] args) throws Exception {
-        int port = 7655;
+        int port = args.length > 0 ? Integer.parseInt(args[0]) : 7655;
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
         server.createContext("/", new HtmlHandler());
         server.start();
