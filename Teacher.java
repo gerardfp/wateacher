@@ -137,6 +137,7 @@ div.host:has(img[src=undefined]), div.host:has(img:not([src])) { display: none; 
 
     async function show(n) {
         const ip = numberToIp(n);
+        const iphost = ip.split(".")[3];
         while(true){
             try {
                 const username = (await (await fetch(`http://${ip}:7654/info`)).json()).username;
@@ -144,7 +145,7 @@ div.host:has(img[src=undefined]), div.host:has(img:not([src])) { display: none; 
 
                 $(`shot${n}`).src = shot;
                 $(`full${n}`).src = shot;
-                $(`info${n}`).innerText = username;
+                $(`info${n}`).innerText = username + ":" + iphost;
             } catch(e) {
                 $(`shot${n}`).removeAttribute('src');
                 $(`full${n}`).removeAttribute('src');
