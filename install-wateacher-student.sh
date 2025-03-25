@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cat << EOF > /usr/local/bin/Student.java
+cat << 'EOF' > /usr/local/bin/Student.java
 import com.sun.net.httpserver.HttpServer;
 
 import javax.imageio.ImageIO;

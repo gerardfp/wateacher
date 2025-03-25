@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cat << EOF > /usr/local/bin/Teacher.java
+cat << 'EOF' > /usr/local/bin/Teacher.java
 import com.sun.net.httpserver.HttpServer;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpExchange;
