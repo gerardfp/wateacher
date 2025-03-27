@@ -111,7 +111,7 @@ div.host:has(img[src=undefined]), div.host:has(img:not([src])) { display: none; 
         $("marco").innerHTML += `
             <div class="host" id="host${i}" host="host${i}"
                 onclick="host${i}.classList.toggle('wide'); this.scrollIntoView()"
-                _onclick="full${i}.showPopover(); console.log('yeahh')"
+                _onclick="full${i}.showPopover();"
                 draggable=true ondragstart="drag(event)" ondrop=drop(event) ondragover="allowDrop(event)">
                     <img id='shot${i}' host="host${i}" alt='Captura'>
                     <span id="info${i}" host="host${i}"></span>
@@ -135,7 +135,6 @@ div.host:has(img[src=undefined]), div.host:has(img:not([src])) { display: none; 
                 $(`info${n}`).innerText = "";
             }
             await sleep(rate);
-
         }
     }
 
