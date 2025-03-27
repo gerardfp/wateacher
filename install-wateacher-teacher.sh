@@ -206,13 +206,13 @@ EOF
 #rm manifest.txt
 #cp Student.jar /usr/local/bin/
 
-cat << EOF > /usr/local/bin/wateacher-teacher
+cat << 'EOF' > /usr/local/bin/wateacher-teacher
 cd /usr/local/bin/
 java Teacher.java
 EOF
 chmod +x /usr/local/bin/wateacher-teacher
 
-cat << EOF >  cat /usr/share/icons/wateacher.svg
+cat << 'EOF' >  /usr/share/icons/wateacher.svg
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    width="61.652893mm"
@@ -261,14 +261,14 @@ cat << EOF >  cat /usr/share/icons/wateacher.svg
 </svg>
 EOF
 
-cat << EOF > /usr/share/applications/wateacher.desktop
+cat << 'EOF' > /usr/share/applications/wateacher.desktop
 [Desktop Entry]
 Name=Wateacher 
 Comment=Bodineja als alumnes
 Exec=wateacher-teacher
 Hidden=false
 Icon=wateacher
-Terminal=false
+Terminal=true
 Type=Application
 StartupNotify=true
 Categories=Utility
